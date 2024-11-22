@@ -28,7 +28,7 @@ public class Product {
     @NotBlank
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Coordinates coordinates;
 
@@ -62,10 +62,11 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL)
     private Person owner;
 
-//    @JoinColumn
-//    @ManyToOne
-//    private User user;
-//    //todo
+    @JoinColumn
+    @ManyToOne
+    private User user;
+
+
 //
 //    public Product(String name, Coordinates coordinates, Date creationDate,
 //                   UnitOfMeasure unitOfMeasure, Organization manufacturer,

@@ -27,5 +27,5 @@ public class ProductDto {
     private Integer rating;
     private String partNumber;
     private PersonDto owner;
-//    private UserDto user;
+    private UserDto user;
 }
