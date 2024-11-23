@@ -11,4 +11,14 @@ public class CoordinatesMapper {
                 .y(dto.getY())
                 .build();
     }
+
+    public static CoordinatesDto toDto(Coordinates entity) {
+        if (entity == null) {
+            return null;
+        }
+        return CoordinatesDto.builder()
+                .x(entity.getX())
+                .y(entity.getY())
+                .build();
+    }
 }

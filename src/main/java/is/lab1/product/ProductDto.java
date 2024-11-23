@@ -28,4 +28,5 @@ public class ProductDto {
     private String partNumber;
     private PersonDto owner;
     private UserDto user;
+    private int totalPages;
 }

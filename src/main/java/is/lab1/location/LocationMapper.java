@@ -12,4 +12,16 @@ public class LocationMapper {
                 .name(dto.getName())
                 .build();
     }
+
+    public static LocationDto toDto(Location entity) {
+        if (entity == null) {
+            return null;
+        }
+        return LocationDto.builder()
+                .id(entity.getId())
+                .x(entity.getX())
+                .y(entity.getY())
+                .name(entity.getName())
+                .build();
+    }
 }

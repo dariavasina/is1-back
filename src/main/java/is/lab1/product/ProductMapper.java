@@ -28,5 +28,24 @@ public class ProductMapper {
 //                .user(UserMapper.toEntity(dto.getUser()))
                 .build();
     }
+
+    public static ProductDto toDto(Product entity) {
+        if (entity == null) {
+            return null;
+        }
+        return ProductDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .coordinates(CoordinatesMapper.toDto(entity.getCoordinates()))
+                .creationDate(entity.getCreationDate())
+                .unitOfMeasure(entity.getUnitOfMeasure())
+                .manufacturer(OrganizationMapper.toDto(entity.getManufacturer()))
+                .price(entity.getPrice())
+                .manufactureCost(entity.getManufactureCost())
+                .rating(entity.getRating())
+                .partNumber(entity.getPartNumber())
+                .owner(PersonMapper.toDto(entity.getOwner()))
+                .build();
+    }
 }
 

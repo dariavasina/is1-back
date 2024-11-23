@@ -10,4 +10,14 @@ public class AddressMapper {
                 .zipCode(dto.getZipCode())
                 .build();
     }
+
+    public static AddressDto toDto(Address entity) {
+        if (entity == null) {
+            return null;
+        }
+        return AddressDto.builder()
+                .id(entity.getId())
+                .zipCode(entity.getZipCode())
+                .build();
+    }
 }

@@ -67,19 +67,4 @@ public class Product {
     private User user;
 
 
-//
-//    public Product(String name, Coordinates coordinates, Date creationDate,
-//                   UnitOfMeasure unitOfMeasure, Organization manufacturer,
-//                   Long price, Double manufactureCost, Integer rating, String partNumber, Person owner) {
-//        this.name = name;
-//        this.coordinates = coordinates;
-//        this.creationDate = creationDate;
-//        this.unitOfMeasure = unitOfMeasure;
-//        this.manufacturer = manufacturer;
-//        this.price = price;
-//        this.manufactureCost = manufactureCost;
-//        this.rating = rating;
-//        this.partNumber = partNumber;
-//        this.owner = owner;
-//    }
 }

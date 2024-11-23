@@ -30,6 +30,7 @@ public class LocationController {
 
     @PutMapping
     public ResponseEntity<Location> update(@RequestBody Location location) {
+        System.out.println("LocationController.update");
         return new ResponseEntity<>(locationService.update(location), HttpStatus.OK);
     }
 

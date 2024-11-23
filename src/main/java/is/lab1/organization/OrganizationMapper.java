@@ -20,5 +20,20 @@ public class OrganizationMapper {
                 .build();
     }
 
+    public static OrganizationDto toDto(Organization entity) {
+        if (entity == null) {
+            return null;
+        }
+        return OrganizationDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .officialAddress(AddressMapper.toDto(entity.getOfficialAddress()))
+                .annualTurnover(entity.getAnnualTurnover())
+                .employeesCount(entity.getEmployeesCount())
+                .rating(entity.getRating())
+                .type(entity.getType())
+                .build();
+    }
+
 }
 

@@ -30,6 +30,7 @@ public class LocationService {
     }
 
     public Location update(Location location) {
+        System.out.printf("LocationService.update: %s%n", location);
         return locationRepository.save(location);
     }
 

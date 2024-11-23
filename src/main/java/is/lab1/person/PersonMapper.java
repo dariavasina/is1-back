@@ -16,4 +16,18 @@ public class PersonMapper {
                 .weight(dto.getWeight())
                 .build();
     }
+
+    public static PersonDto toDto(Person entity) {
+        if (entity == null) {
+            return null;
+        }
+        return PersonDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .eyeColor(entity.getEyeColor())
+                .hairColor(entity.getHairColor())
+                .location(LocationMapper.toDto(entity.getLocation()))
+                .weight(entity.getWeight())
+                .build();
+    }
 }

@@ -1,5 +1,7 @@
 package is.lab1.product;
 
+import is.lab1.coordinates.Coordinates;
+import is.lab1.organization.Organization;
 import is.lab1.user.User;
 import jakarta.annotation.Nonnull;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findAllByUser(User user);
 
+    List<Product> findAllByCoordinates(Coordinates coordinates);
+    List<Product> findAllByManufacturer(Organization manufacturer);
     @Nonnull
     Page<Product> findAll(Specification<Product> spec, @Nonnull Pageable pageable);
 }
