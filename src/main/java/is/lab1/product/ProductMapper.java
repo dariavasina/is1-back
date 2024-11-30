@@ -45,6 +45,7 @@ public class ProductMapper {
                 .rating(entity.getRating())
                 .partNumber(entity.getPartNumber())
                 .owner(PersonMapper.toDto(entity.getOwner()))
+                .user(UserMapper.toDto(entity.getUser()))
                 .build();
     }
 }

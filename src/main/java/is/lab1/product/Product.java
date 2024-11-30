@@ -63,7 +63,7 @@ public class Product {
     private Person owner;
 
     @JoinColumn
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
 

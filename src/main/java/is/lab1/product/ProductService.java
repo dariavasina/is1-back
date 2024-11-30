@@ -12,6 +12,7 @@ import is.lab1.organization.OrganizationRepository;
 import is.lab1.person.Person;
 import is.lab1.person.PersonRepository;
 import is.lab1.person.PersonService;
+import is.lab1.user.Role;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,8 +55,19 @@ public class ProductService {
 
     }
 
-    public List<Product> getProducts() {
-        return productRepository.findAll();
+//    public List<Product> getProducts() {
+//        return productRepository.findAll();
+//    }
+
+
+    public List<ProductDto> getProducts(Pageable paging, ProductFilter productFilter) {
+        final Specification<Product> spec = productSpecificationService.filterBy(productFilter);
+        final Page<Product> productPage = productRepository.findAll(spec, paging);
+        return productPage
+                .stream()
+                .map(ProductMapper::toDto)
+                .peek(productDto -> productDto.setTotalPages(productPage.getTotalPages()))
+                .toList();
     }
 
     @Transactional
@@ -135,6 +147,15 @@ public class ProductService {
 
         System.out.println("new product: " + product);
     }
+
+//    public void checkUser(long id, User user) {
+//        final Product product = productRepository.findById(id)
+//                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No product found by this id"));
+//        if (product.getUser().equals(user) || user.getRole().equals(Role.ADMIN)) {
+//            return;
+//        }
+//        throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not user of this product");
+//    }
 
 
     public Product update(ProductDto dto) {

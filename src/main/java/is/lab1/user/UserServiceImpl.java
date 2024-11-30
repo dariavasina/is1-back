@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream().map(User::getLogin).toList();
     }
 
+
     @Override
     public User getUserByLogin(String login) {
         System.out.println("Fetching user by login: " + login);

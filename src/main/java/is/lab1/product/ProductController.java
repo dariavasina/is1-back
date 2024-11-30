@@ -36,9 +36,42 @@ public class ProductController {
         this.userService = userService;
     }
 
+
+//    public List<Product> getProducts() {
+//        return productService.getProducts();
+//    }
     @GetMapping
-    public List<Product> getProducts() {
-        return productService.getProducts();
+    ResponseEntity<List<ProductDto>> getAllProducts(@RequestParam(defaultValue = "0") @Min(0) int page,
+                                                    @RequestParam(defaultValue = "5") @Min(0) int limit,
+                                                    @RequestParam(value = "id", required = false) Long id,
+                                                    @RequestParam(value = "name", required = false) String name,
+                                                    @RequestParam(value = "coordinates", required = false) Coordinates coordinates,
+                                                    @RequestParam(value = "createdAt", required = false) Long creationDateTimestampMs,
+                                                    @RequestParam(value = "unitOfMeasure", required = false) UnitOfMeasure unitOfMeasure,
+                                                    @RequestParam(value = "manufacturer", required = false) Organization manufacturer,
+                                                    @RequestParam(value = "price", required = false) Integer price,
+                                                    @RequestParam(value = "manufactureCost", required = false) Long manufactureCost,
+                                                    @RequestParam(value = "rating", required = false) Double rating,
+                                                    @RequestParam(value = "owner", required = false) Person owner,
+                                                    @RequestParam(value = "login", required = false) String login,
+                                                    @RequestParam(defaultValue = "id") String sortBy,
+                                                    @RequestParam(defaultValue = "true") boolean ascending) {
+        final ProductFilter productFilter = new ProductFilter(
+                id,
+                name,
+                convertUnixTimestampToLocalDate(creationDateTimestampMs),
+                coordinates,
+                unitOfMeasure,
+                manufacturer,
+                price,
+                manufactureCost,
+                rating,
+                owner,
+                userService.getUserByLogin(login)
+        );
+        final Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+
+        return ResponseEntity.ok(productService.getProducts(PageRequest.of(page, limit, sort), productFilter));
     }
 
 //    @PostMapping
@@ -59,6 +92,7 @@ public class ProductController {
     public ResponseEntity<ProductDto> update(@RequestBody ProductDto dto, @RequestHeader(name = "Authorization") String token) {
         System.out.println("ProductController.update");
         final User user = userService.getUserByToken(getToken(token));
+//        productService.checkUser(dto.getId(), user);
         return ResponseEntity.ok(ProductMapper.toDto(productService.update(dto)));
         //return new ResponseEntity<>(productService.update(product), HttpStatus.OK);
     }
