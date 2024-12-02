@@ -31,8 +31,11 @@ public class ProductMapper {
 
     public static ProductDto toDto(Product entity) {
         if (entity == null) {
+            System.out.println("ProductMapper.toDto: entity is null");
             return null;
         }
+
+        System.out.println("ProductMapper.toDto: entity = " + entity);
         return ProductDto.builder()
                 .id(entity.getId())
                 .name(entity.getName())

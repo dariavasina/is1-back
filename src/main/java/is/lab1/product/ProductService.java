@@ -63,6 +63,9 @@ public class ProductService {
     public List<ProductDto> getProducts(Pageable paging, ProductFilter productFilter) {
         final Specification<Product> spec = productSpecificationService.filterBy(productFilter);
         final Page<Product> productPage = productRepository.findAll(spec, paging);
+        System.out.println("productPage: " + productPage);
+        System.out.println("spec: " + spec);
+        System.out.println("productFilter: " + productFilter);
         return productPage
                 .stream()
                 .map(ProductMapper::toDto)
@@ -160,6 +163,7 @@ public class ProductService {
 
     public Product update(ProductDto dto) {
         final Product product = ProductMapper.toEntity(dto);
+        System.out.println("Product to update: " + product);
         Product existingProduct = productRepository.findById(product.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Product not found with ID: " + product.getId()));
 
@@ -180,6 +184,8 @@ public class ProductService {
         product.setManufacturer(product.getManufacturer());
 
         product.setOwner(product.getOwner());
+
+        product.setUser(existingProduct.getUser());
 
         System.out.println("Updated product: " + product);
         return productRepository.save(product);
